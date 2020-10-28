@@ -11,6 +11,13 @@ node {
         sh 'terraform plan'
     }
      stage('Apply') {
-        sh 'terraform apply -auto-approve=true'
+        sh 'terraform apply'
+        input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+              }
     }
 }
