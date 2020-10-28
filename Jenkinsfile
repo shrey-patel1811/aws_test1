@@ -12,13 +12,13 @@ node {
     }
      stage('Apply') {
         sh 'terraform apply'
-        input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
-                parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-              }
+        script {
+             def userInput = input(id: 'userInput', message: 'Merge to?',
+             parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'strDef', 
+                description:'describing choices', name:'nameChoice', choices: "QA\nUAT\nProduction\nDevelop\nMaster"]
+             ])
+
+            println(userInput); //Use this value to branch to different logic if needed
         }
     }
 }
