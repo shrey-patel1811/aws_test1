@@ -11,6 +11,6 @@ node {
         sh 'terraform plan'
     }
      stage('Apply') {
-        sh 'terraform apply input=true'
+        sh 'terraform apply -input=true'
     }
 }
